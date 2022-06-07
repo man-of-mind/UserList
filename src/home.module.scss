@@ -1,0 +1,50 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h2 {
+        margin: 20px auto 20px 150px;
+    }
+    .users-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 15px;
+    }
+    .user {
+        padding: 20px 10px;
+        border-radius: 4px;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 300px;
+        span {
+            text-align: center;
+        }
+        button {
+            cursor: pointer;
+            margin-top: 5px;
+        }
+    }
+}
+
+.create-user {
+    display: block;
+    form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .age-input {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            align-items: flex-start;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    }
+}
