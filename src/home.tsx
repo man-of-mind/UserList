@@ -1,31 +1,33 @@
-import React from "react";
-import { NewUser, UserContext } from "./new-user";
-import User from "./user";
+import React, { useState } from "react";
+import { NewUser } from "./new-user";
 import styles from "./home.module.scss";
-
-export const context = React.createContext("");
+import { UserContext } from "./new-user";
 
 const Home = () => {
+    const [users, setUsers] = useState<Array<Array<string>>>([]);
+
+//    const userCards = users.map(user => {
+//        return (
+//            <div className={styles['user']}>
+//                <h3>{user[0]}</h3>
+//                <h3>{user[1]}</h3>
+//                <span>{user[2]}</span>
+//                <button>Delete User</button>
+//            </div>
+//        );
+//    })
+
+
     return (
-        <UserContext.Consumer>
-        {value =>
-        
-        <div className={styles['home']}>
-            <NewUser />
-            <h2>Availalble Users</h2>
-            <div className={styles['users-container']}>
-                <context.Provider value="timi">
-                    <User />
-                </context.Provider>
-                <User />
-                <User />
-                <User />
-                <User />
-                <User />
+        <UserContext.Provider value={{ users, setUsers}}>
+            <div className={styles['home']}>
+                <NewUser />
+                <h2>Available Users</h2>
+                <div className={styles['users-container']}>
+{/*                    {userCards}
+*/}                </div>
             </div>
-            
-        </div>}
-        </UserContext.Consumer>
+        </UserContext.Provider>
     );
 }
 

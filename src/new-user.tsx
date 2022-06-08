@@ -1,35 +1,44 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./home.module.scss";
-import User from "./user";
 
-export const UserContext = React.createContext<string>("");
+
+interface properties {
+    users?: any,
+    setUsers?: any
+}
+
+export const UserContext = React.createContext<properties>({});
 
 export const Users = () => {
 
 }
 
-interface props {
-    name?: string,
-    age?: string,
-    bio?: string
-}
 
 export const NewUser = () => {
-    const [name, setName] = useState("");
-    const [age, setAge] = useState("");
-    const [bio, setBio] = useState("");
-    const [datum, setData] = useState<Array<props>>([]);
+    const { setUsers, users} = useContext(UserContext);
+    const [name, setUserName] = useState("");
+    const [age, setUserAge] = useState("");
+    const [bio, setUserBio] = useState("");
+
+
+    console.log(users, typeof(users));
+    function setData() {
+        const data = [`${name}`, `${age}`, `${bio}`];
+        console.log(users)
+        let dat = users.push(data);
+        setUsers(dat);
+    }
 
     const handleSubmit = (e:any) => {
         e.preventDefault();
-        const name = e.target[0].value;
-        const age = e.target[1].value;
-        const bio = e.target[2].value;
-        const data:Array<props> = [{name: `${name}`}, {age: `${age}`}, {bio: `${bio}`}];
-        setData(data);
+        setData();
     }
+
+//    useEffect(() => {
+//        setData();
+//    })
+
     return (
-        <UserContext.Provider value="timothy">
         <div className={styles['create-user']}>
             <h2>ADD NEW USER</h2>
             <form onSubmit={handleSubmit}>
@@ -37,14 +46,14 @@ export const NewUser = () => {
                     type="text" 
                     placeholder="name" 
                     value={name} 
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setUserName(e.target.value)}
                 ></input>
                 <input 
                     type="text" 
                     placeholder="age" 
                     className={styles['age-input']} 
                     value={age} 
-                    onChange={e => setAge(e.target.value)}
+                    onChange={e => setUserAge(e.target.value)}
                 ></input>
                 <textarea 
                     typeof="text" 
@@ -52,11 +61,10 @@ export const NewUser = () => {
                     rows={5} 
                     cols={26} 
                     value={bio} 
-                    onChange={e => setBio(e.target.value)}></textarea>
+                    onChange={e => setUserBio(e.target.value)}></textarea>
                 <button>Add User</button>
             </form>
         </div>
-        </UserContext.Provider>
     );
 }
 
