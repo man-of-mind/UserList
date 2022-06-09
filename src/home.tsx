@@ -26,7 +26,7 @@ const Home = () => {
     return (
         <div className={styles['home']}>
             <NewUser />
-            <h2>Available Users</h2>
+            <h2 className={styles['text']}>Available Users</h2>
             <div className={styles['users-container']}>
                 {userCards}
             </div>
